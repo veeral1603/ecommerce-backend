@@ -1,4 +1,4 @@
-# ecom-backend
+# E-commerce Backend
 
 To install dependencies:
 
@@ -9,7 +9,8 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+bun dev
+bun run email-worker
 ```
 
 This project was created using `bun init` in bun v1.3.11. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
