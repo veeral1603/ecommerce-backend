@@ -9,6 +9,7 @@ const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
 
 const app = express();
 
+//CORS configuration
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -26,6 +27,7 @@ app.use(
     credentials: true,
   }),
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
