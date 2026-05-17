@@ -8,6 +8,8 @@ import type {
 } from "@/modules/auth/auth.types";
 import type { TempUser, User } from "@prisma/client";
 import { ApiError } from "@/utils/apiError";
+import emailQueue from "@/queues/email.queue";
+import type { EmailJobData } from "@/types";
 
 const createTempUser = async (
   email: string,
@@ -28,8 +30,17 @@ const createTempUser = async (
     "1h",
   );
 
-  //Email logic
+  //Email logic, add job to email queue
   console.log("Generated verification token:", verificationToken);
+  const emailJobData: EmailJobData = {
+    recipientEmail: email,
+    recipientName: name,
+    type: "verification",
+    payload: {
+      verificationToken,
+    },
+  };
+  await emailQueue.add("verification-email", emailJobData);
 
   const verificationTokenExpiry = new Date(Date.now() + 3600000); // 1 hour from now
 
@@ -91,6 +102,15 @@ const verifyEmailAndCreateUser = async (token: string): Promise<string> => {
     "7d",
   );
 
+  //Email logic, add job to email queue
+  const emailJobData: EmailJobData = {
+    recipientEmail: user.email,
+    recipientName: user.name,
+    type: "welcome",
+    payload: {},
+  };
+  await emailQueue.add("welcome-email", emailJobData);
+
   return access_token;
 };
 
@@ -131,8 +151,17 @@ const passwordResetRequest = async (email: string): Promise<void> => {
   );
   const passwordResetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour from now
 
-  //Email logic
+  //Email logic, add job to email queue
   console.log("Generated password reset token:", passwordResetToken);
+  const emailJobData: EmailJobData = {
+    recipientEmail: email,
+    recipientName: user.name,
+    type: "passwordReset",
+    payload: {
+      passwordResetToken,
+    },
+  };
+  await emailQueue.add("password-reset-email", emailJobData);
 
   await prisma.user.update({
     where: { email },

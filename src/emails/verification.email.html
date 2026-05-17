@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Verify Email</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f5;
+      font-family: Arial, sans-serif;
+    "
+  >
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" style="padding: 40px 20px">
+          <table
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            style="background: #ffffff; border-radius: 12px; overflow: hidden"
+          >
+            <tr>
+              <td
+                style="background: #111827; padding: 32px; text-align: center"
+              >
+                <h1 style="color: #ffffff; margin: 0; font-size: 28px">
+                  Verify Your Email
+                </h1>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 40px 32px; color: #374151">
+                <h2 style="margin-top: 0; font-size: 24px; color: #111827">
+                  Hi {{name}},
+                </h2>
+
+                <p style="font-size: 16px; line-height: 1.7">
+                  Please verify your email address to activate your account.
+                </p>
+
+                <div style="margin-top: 32px; text-align: center">
+                  <a
+                    href="{{verification_link}}"
+                    style="
+                      background: #111827;
+                      color: #ffffff;
+                      text-decoration: none;
+                      padding: 14px 28px;
+                      border-radius: 8px;
+                      display: inline-block;
+                      font-weight: bold;
+                    "
+                    target="_blank"
+                  >
+                    Verify Email
+                  </a>
+                </div>
+
+                <p
+                  style="
+                    margin-top: 32px;
+                    font-size: 14px;
+                    color: #6b7280;
+                    line-height: 1.6;
+                  "
+                >
+                  If you did not create an account, you can safely ignore this
+                  email.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                style="
+                  padding: 24px;
+                  text-align: center;
+                  color: #9ca3af;
+                  font-size: 13px;
+                "
+              >
+                © 2026 Your Store. All rights reserved.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

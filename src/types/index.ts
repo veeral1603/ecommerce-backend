@@ -1,7 +1,23 @@
-export type EmailJobType = "verification" | "welcome" | "passwordReset";
-export interface EmailJobData {
-  recipientEmail: string;
-  recipientName: string;
-  type: EmailJobType;
-  payload: Record<string, unknown>;
-}
+export type EmailJobData =
+  | {
+      type: "verification";
+      recipientEmail: string;
+      recipientName: string;
+      payload: {
+        verificationToken: string;
+      };
+    }
+  | {
+      type: "passwordReset";
+      recipientEmail: string;
+      recipientName: string;
+      payload: {
+        passwordResetToken: string;
+      };
+    }
+  | {
+      type: "welcome";
+      recipientEmail: string;
+      recipientName: string;
+      payload?: Record<string, never>;
+    };
