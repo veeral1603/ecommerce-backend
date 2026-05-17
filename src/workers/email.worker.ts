@@ -1,27 +1,14 @@
 import redisClient from "@/lib/redis";
+import { EMAIL_QUEUE_NAME } from "@/queues/email.queue";
+import { Worker, type Job } from "bullmq";
 import type { EmailJobData } from "@/types";
 
-const EMAIL_QUEUE_KEY = "queue:email";
-
-const processEmail = async (_emailJobData: EmailJobData) => {
-  // Email sending logic
+const emailProcessor = async (_job: Job<EmailJobData>) => {
+  await new Promise((resolve) => setTimeout(resolve, 10000));
 };
 
-const worker = async () => {
-  while (true) {
-    const emailDataString = await redisClient.brpop(EMAIL_QUEUE_KEY, 0);
-    if (!emailDataString) {
-      continue;
-    }
+new Worker(EMAIL_QUEUE_NAME, emailProcessor, {
+  connection: redisClient,
+});
 
-    const emailData: EmailJobData = JSON.parse(emailDataString[1]);
-
-    try {
-      await processEmail(emailData);
-    } catch (error) {
-      console.error("Error processing email job:", error);
-    }
-  }
-};
-
-await worker();
+console.log("Email worker is running...");

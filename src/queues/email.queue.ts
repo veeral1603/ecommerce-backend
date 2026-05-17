@@ -1,8 +1,10 @@
 import redisClient from "@/lib/redis";
-import type { EmailJobData } from "@/types";
+import { Queue } from "bullmq";
 
-const EMAIL_QUEUE_KEY = "queue:email";
+export const EMAIL_QUEUE_NAME = "email-queue";
 
-export const addEmailToQueue = async (emailData: EmailJobData) => {
-  await redisClient.rpush(EMAIL_QUEUE_KEY, JSON.stringify(emailData));
-};
+const emailQueue = new Queue(EMAIL_QUEUE_NAME, {
+  connection: redisClient,
+});
+
+export default emailQueue;
