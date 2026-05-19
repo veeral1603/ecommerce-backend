@@ -92,7 +92,7 @@ model Address {
 
   addressLine1 String
 
-  addressType ADDRESS_TYPE
+  addressType ADDRESS_TYPE @default(HOME)
 
   userId String
   user User @relation(fields: [userId], references: [id])
