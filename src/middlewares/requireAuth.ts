@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { ApiError } from "../utils/apiError";
+import ApiError from "../utils/apiError";
 import { verifyToken } from "@/utils/jwt";
 import type { AccessTokenPayloadType } from "@/modules/auth/auth.types";
 import { AccessTokenPayloadSchema } from "@/modules/auth/auth.validators";
@@ -23,6 +23,7 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   req.user = {
     id: tokenPayload.userId,
     email: tokenPayload.email,
+    isAdmin: tokenPayload.isAdmin,
   };
 
   next();

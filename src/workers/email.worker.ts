@@ -6,7 +6,7 @@ import {
   sendVerificationEmail,
   sendPasswordResetEmail,
   sendWelcomeEmail,
-} from "@/lib/resend";
+} from "@/services/email.service";
 
 const emailProcessor = async (_job: Job<EmailJobData>) => {
   const { recipientEmail, recipientName, type, payload } = _job.data;

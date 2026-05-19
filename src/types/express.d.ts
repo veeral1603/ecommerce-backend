@@ -5,7 +5,10 @@ declare module "express" {
     user?: {
       id: string;
       email: string;
+      isAdmin: boolean;
     };
     validatedBody?: unknown;
+    validatedParams?: unknown;
+    validatedQuery?: unknown;
   }
 }

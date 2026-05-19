@@ -1,4 +1,4 @@
-import { apiHandler } from "../../utils/apiHandler";
+import apiHandler from "../../utils/apiHandler";
 import authService from "@/modules/auth/auth.services";
 import type {
   SignupInput,

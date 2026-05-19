@@ -28,7 +28,9 @@
 
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    "types": ["node", "multer"]
   },
   "include": ["src"]
 }

@@ -5,7 +5,7 @@ export type HandlerFunction = (
   next: NextFunction,
 ) => void | Promise<void>;
 
-export const apiHandler = (handler: HandlerFunction) => {
+const apiHandler = (handler: HandlerFunction) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handler(req, res, next);
@@ -14,3 +14,5 @@ export const apiHandler = (handler: HandlerFunction) => {
     }
   };
 };
+
+export default apiHandler;

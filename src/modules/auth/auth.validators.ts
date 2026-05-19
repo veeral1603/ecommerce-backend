@@ -71,4 +71,5 @@ export const ResetPasswordSchema = z.object({
 export const AccessTokenPayloadSchema = z.object({
   userId: z.string(),
   email: z.string().email(),
+  isAdmin: z.boolean().default(false),
 });

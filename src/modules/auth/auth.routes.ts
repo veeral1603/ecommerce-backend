@@ -14,27 +14,31 @@ const router = Router();
 //POST ROUTES
 router.post(
   "/signup",
-  validateSchema(SignupSchema),
+  validateSchema({ body: SignupSchema }),
   authControllers.signupUser,
 );
 
 router.post(
   "/verify-email",
-  validateSchema(VerifyEmailSchema),
+  validateSchema({ body: VerifyEmailSchema }),
   authControllers.verifyEmail,
 );
 
-router.post("/login", validateSchema(LoginSchema), authControllers.loginUser);
+router.post(
+  "/login",
+  validateSchema({ body: LoginSchema }),
+  authControllers.loginUser,
+);
 
 router.post(
   "/forgot-password",
-  validateSchema(ForgotPasswordSchema),
+  validateSchema({ body: ForgotPasswordSchema }),
   authControllers.forgotPassword,
 );
 
 router.post(
   "/reset-password",
-  validateSchema(ResetPasswordSchema),
+  validateSchema({ body: ResetPasswordSchema }),
   authControllers.resetPassword,
 );
 

@@ -7,7 +7,7 @@ import type {
   AccessTokenPayloadType,
 } from "@/modules/auth/auth.types";
 import type { TempUser, User } from "@prisma/client";
-import { ApiError } from "@/utils/apiError";
+import ApiError from "@/utils/apiError";
 import emailQueue from "@/queues/email.queue";
 import type { EmailJobData } from "@/types";
 
@@ -98,7 +98,7 @@ const verifyEmailAndCreateUser = async (token: string): Promise<string> => {
   });
 
   const access_token = await generateToken<AccessTokenPayloadType>(
-    { userId: user.id, email: user.email },
+    { userId: user.id, email: user.email, isAdmin: false },
     "7d",
   );
 
@@ -129,7 +129,7 @@ const loginUser = async (email: string, password: string): Promise<string> => {
   }
 
   const access_token = await generateToken<AccessTokenPayloadType>(
-    { userId: user.id, email: user.email },
+    { userId: user.id, email: user.email, isAdmin: user.isAdmin },
     "7d",
   );
 

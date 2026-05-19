@@ -1,5 +1,5 @@
 import { type JWTPayload, SignJWT, jwtVerify } from "jose";
-import { ApiError } from "@/utils/apiError";
+import ApiError from "@/utils/apiError";
 
 const secret = new TextEncoder().encode(
   process.env.JWT_SECRET ?? "default_secret",
