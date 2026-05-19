@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import authRoutes from "../modules/auth/auth.routes";
 import productRoutes from "@/modules/products/product.routes";
-import adminProductRoutes from "@/modules/products/admin.product.routes";
+import adminProductRoutes from "@/modules/products/product.admin.routes";
 
 const router = Router();
 

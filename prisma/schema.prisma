@@ -35,6 +35,8 @@ model User {
 
   isAdmin Boolean @default(false)
 
+  addresses Address[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -68,6 +70,32 @@ model ProductImage {
 
   productId String
   product Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+enum ADDRESS_TYPE {
+  HOME
+  WORK
+}
+
+model Address {
+  id String @id @default(uuid())
+
+  name String
+  mobile String
+
+  pinCode String
+  state String
+  locality String
+  city String
+
+  addressLine1 String
+
+  addressType ADDRESS_TYPE
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
 }

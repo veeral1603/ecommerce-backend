@@ -1,7 +1,7 @@
 import { Router } from "express";
 import productController from "@/modules/products/product.controller";
 import validateSchema from "@/middlewares/validateSchema";
-import { getProductByIdParamsSchema } from "./product.validator";
+import { getProductByIdParamsSchema } from "./product.validators";
 
 const router = Router();
 

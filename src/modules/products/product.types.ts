@@ -3,7 +3,7 @@ import type {
   getProductByIdParamsSchema,
   deleteProductParamsSchema,
   publishUnpublishProductParamsSchema,
-} from "@/modules/products/product.validator";
+} from "@/modules/products/product.validators";
 import type { z } from "zod";
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;

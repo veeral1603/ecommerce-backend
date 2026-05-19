@@ -7,7 +7,7 @@ import {
   createProductSchema,
   deleteProductParamsSchema,
   publishUnpublishProductParamsSchema,
-} from "@/modules/products/product.validator";
+} from "@/modules/products/product.validators";
 import multerUpload from "@/middlewares/multer";
 import validateFiles from "@/middlewares/validateFiles";
 

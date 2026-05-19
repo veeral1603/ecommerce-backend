@@ -1,5 +1,5 @@
 import apiHandler from "../../utils/apiHandler";
-import authService from "@/modules/auth/auth.services";
+import authService from "@/modules/auth/auth.service";
 import type {
   SignupInput,
   VerifyEmailInput,
