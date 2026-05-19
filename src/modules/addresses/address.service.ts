@@ -6,6 +6,16 @@ import type {
 } from "@/modules/addresses/address.types";
 import ApiError from "@/utils/apiError";
 
+export const getMyAddresses = async (userId: string): Promise<Address[]> => {
+  const addresses = await prisma.address.findMany({
+    where: {
+      userId,
+    },
+  });
+
+  return addresses ?? [];
+};
+
 export const addAddress = async (
   addressData: AddNewAddressInput,
   userId: string,
@@ -85,6 +95,7 @@ export const deleteAddress = async (
 };
 
 export default {
+  getMyAddresses,
   addAddress,
   updateAddress,
   deleteAddress,

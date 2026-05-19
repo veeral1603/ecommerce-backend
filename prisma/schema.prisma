@@ -21,12 +21,19 @@ model TempUser {
   updatedAt DateTime @updatedAt
 }
 
+enum GENDER {
+  MALE
+  FEMALE
+  OTHER
+}
+
 model User {
   id   String @id @default(uuid())
 
   name  String
   email String @unique
   password String
+  gender GENDER?
 
   isVerified Boolean @default(false)
 

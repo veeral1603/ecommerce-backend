@@ -12,6 +12,8 @@ import {
 
 const router = Router();
 
+router.get("/", requireAuth, addressController.getMyAddresses);
+
 router.post(
   "/",
   requireAuth,

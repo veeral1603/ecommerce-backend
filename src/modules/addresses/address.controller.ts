@@ -8,6 +8,14 @@ import type {
 import { successResponse } from "@/utils/apiResponses";
 import addressService from "@/modules/addresses/address.service";
 
+const getMyAddresses = apiHandler(async (req, res) => {
+  const user = req.user!;
+
+  const addressess = await addressService.getMyAddresses(user.id);
+
+  successResponse(res, "Addresses retrieved successfully", addressess);
+});
+
 const addAddress = apiHandler(async (req, res) => {
   const user = req.user;
   const validatedAddressData = req.validatedBody as AddNewAddressInput;
@@ -44,6 +52,7 @@ const deleteAddress = apiHandler(async (req, res) => {
 });
 
 export default {
+  getMyAddresses,
   addAddress,
   updateAddress,
   deleteAddress,

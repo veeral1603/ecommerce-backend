@@ -1,8 +1,6 @@
 import { Router } from "express";
 import productController from "./product.controller";
 import validateSchema from "@/middlewares/validateSchema";
-import requireAuth from "@/middlewares/requireAuth";
-import requireAdmin from "@/middlewares/requireAdmin";
 import {
   createProductSchema,
   deleteProductParamsSchema,
@@ -16,8 +14,6 @@ const router = Router();
 //PRODUCT CREATION
 router.post(
   "/",
-  requireAuth,
-  requireAdmin,
   multerUpload.array("images"),
   validateFiles({
     required: true,
@@ -31,8 +27,6 @@ router.post(
 //PRODUCT DELETION
 router.delete(
   "/:productId",
-  requireAuth,
-  requireAdmin,
   validateSchema({ params: deleteProductParamsSchema }),
   productController.deleteProduct,
 );
@@ -40,8 +34,6 @@ router.delete(
 //PUBLISH PRODUCT
 router.patch(
   "/:productId/publish",
-  requireAuth,
-  requireAdmin,
   validateSchema({ params: publishUnpublishProductParamsSchema }),
   productController.publishProduct,
 );
@@ -49,8 +41,6 @@ router.patch(
 //UNPUBLISH PRODUCT
 router.patch(
   "/:productId/unpublish",
-  requireAuth,
-  requireAdmin,
   validateSchema({ params: publishUnpublishProductParamsSchema }),
   productController.unpublishProduct,
 );
