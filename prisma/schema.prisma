@@ -44,6 +44,7 @@ model User {
 
   addresses Address[]
   cart Cart?
+  orders Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -64,7 +65,8 @@ model Product {
 
   isPublished Boolean @default(false)
 
- cartItems CartItem[]
+  cartItems CartItem[]
+  orderItems OrderItem[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -107,6 +109,8 @@ model Address {
   userId String
   user User @relation(fields: [userId], references: [id])
 
+  orders Order[]
+
   createdAt DateTime @default(now())
 }
 
@@ -116,7 +120,7 @@ model Cart {
   items CartItem[]
 
   userId String @unique
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -128,14 +132,59 @@ model CartItem {
   quantity Int @default(1)
 
   productId String
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
 
   cartId String
-  cart Cart @relation(fields: [cartId], references: [id])
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([cartId, productId])
+}
+
+enum ORDER_STATUS {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Order {
+  id String @id @default(uuid())
+
+  totalAmount Decimal @db.Decimal(10, 2)
+  status ORDER_STATUS @default(PENDING)
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  shippingAddressId String
+  shippingAddress Address @relation(fields: [shippingAddressId], references: [id])
+
+  items OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+  id String @id @default(uuid())
+
+  quantity Int @default(1)
+
+  //snapshot of product details at the time of purchase
+  productName String
+  productImage String
+  priceAtPurchase Decimal @db.Decimal(10, 2)
+
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+
+  orderId String
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
 }

@@ -14,6 +14,9 @@ import adminUserRoutes from "@/modules/users/user.admin.routes";
 
 import cartRoutes from "@/modules/carts/cart.routes";
 
+import orderRoutes from "@/modules/orders/order.routes";
+import adminOrderRoutes from "@/modules/orders/order.admin.routes";
+
 const router = Router();
 
 router.use("/auth", authRoutes);
@@ -27,5 +30,8 @@ router.use("/users", userRoutes);
 router.use("/admin/users", requireAuth, requireAdmin, adminUserRoutes);
 
 router.use("/cart", requireAuth, cartRoutes);
+
+router.use("/orders", requireAuth, orderRoutes);
+router.use("/admin/orders", requireAuth, requireAdmin, adminOrderRoutes);
 
 export default router;
